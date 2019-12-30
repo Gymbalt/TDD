@@ -20,7 +20,7 @@ class NewVisitorTest(unittest.TestCase):
 
 		# Эдит слышала про крутое новое онлайн-приложение со списком
 		# неотложных дел. Она решает оценить его домашнюю страницу
-		self.browser.get('http://localhost:8000')
+		self.browser.get('http://localhost:8002')
 		# Она видит, что заголовок и шапка страницы говорят о списках
 		# неотложных дел
 		self.assertIn('To-Do', self.browser.title)
@@ -42,7 +42,8 @@ class NewVisitorTest(unittest.TestCase):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertTrue(
-			any(row.text == '1: Купить павлиньи перья' for row in rows)
+			any(row.text == '1: Купить павлиньи перья' for row in rows),
+			"Новый элемент списка не появился в таблице"
 		)
 		# Текствое поле по-прежнему приглашает ее добавить еще один элемент.
 		# Она вводит "Сделать мушку из павлиньих перьев"
