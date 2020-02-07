@@ -48,9 +48,6 @@ class NewVisitorTest(unittest.TestCase):
 		time.sleep(1)
 		self.check_for_row_in_list_table('1: Купить павлиньи перья')
 
-		table = self.browser.find_element_by_id('id_list_table')
-		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('1: Купить павлиньи перья', [row.text for row in rows])
 		# Текствое поле по-прежнему приглашает ее добавить еще один элемент.
 		# Она вводит "Сделать мушку из павлиньих перьев"
 		# (Эдит очень методична)
@@ -60,10 +57,10 @@ class NewVisitorTest(unittest.TestCase):
 		time.sleep(1)
 
 		# Страница снова обновляется и теперь показывает оба элемента ее списка
-		table = self.browser.find_element_by_id('id_list_table')
-		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('1: Купить павлиньи перья', [row.text for row in rows])
-		self.assertIn('2: Сделать мушку из павлиньих перьев',[row.text for row in rows])
+		self.check_for_row_in_list_table('1: Купить павлиньи перья')
+		self.check_for_row_in_list_table(
+			'2: Сделать мушку из павлиньих перьев',
+		)
 		# Эдит интересно, запомнит ли сайт ее список. Далее она видит, что
 		# сайт сгенерировал для нее уникальный URL-адрес – об этом
 		# выводится небольшой текст с объяснениями.
